@@ -5,7 +5,8 @@ export default class App extends React.Component{
       this.state = {
         num1:0,
         num2:0,
-        sum:0
+        sum:0,
+        average:0
       }
     }
   
@@ -21,21 +22,25 @@ export default class App extends React.Component{
         });
       }
   
-    handleAdd=()=>{
+    handleAdd=(handleAverage)=>{
       this.setState({
         sum: parseInt(this.state.num1) + parseInt(this.state.num2)
-      })
-    }
+      }, handleAverage=(average)=>{
+        this.setState({average: this.state.sum/2})
+        return average
+    })
+  }
 
     handleReset=()=>{
         this.setState({
             num1:0,
             num2:0,
-            sum:0
+            sum:0,
+            average:0
         })
     }
   
-    render(){
+    render() {
       return(
         <div>
           <input 
@@ -51,13 +56,15 @@ export default class App extends React.Component{
           />
           <br />
           <button onClick={this.handleAdd}>
-            Add
+            Add & Average
           </button>
           <button onClick={this.handleReset}>
             Reset
           </button>
           <br />
           The Sum is : {this.state.sum}
+          <br />
+          The Average is: {this.state.average}
         </div>
       )
     }
